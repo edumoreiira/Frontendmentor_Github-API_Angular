@@ -1,4 +1,137 @@
 
-p{
-    color: var(--bkg-color);
+*{
+    color: var(--text-color);
+}
+
+:host{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+button{
+    background-color: transparent;
+    border: 0;
+}
+
+i{
+    display: flex;
+}
+
+$gap: 1em;
+$padding: 1em;
+$border-radius: .65em;
+.github-search{
+    flex: 1;
+    font-size: 1.1em;
+    max-width: min(43em, 90%);
+    max-height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: $gap;
+    header{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: $gap;
+        .logo{
+            font-size: 1.7em;
+            font-weight: 600;
+        }
+        .theme-switch{
+            font-size: 1em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: .8em;
+            span{
+                font-weight: 600;
+                letter-spacing: .2em;
+                font-size: .8em;
+            }
+        }
+    }
+
+    .user-search{
+        display: flex;
+        justify-content: space-between;
+        background-color: var(--bkg-color);
+        padding: $padding/2;
+        border-radius: $border-radius;
+        .search{
+            display: flex;
+            align-items: center;
+            gap: $gap;
+            width: 100%;
+            margin-left: $padding;
+            i{
+                color: var(--blue-color);
+                font-size: 1.5em;
+            }
+            #search-user{
+                background-color: transparent;
+                font-size: 1em;
+                font-weight: 100;
+                border: 0;
+                width: 100%;
+                &:focus{
+                    outline: 0;
+                }
+                &::placeholder{
+                    color: var(--text-color);
+                }
+            }
+        }
+        .search-btn{
+            background-color: var(--blue-color);
+            font-weight: 700;
+            padding: $padding $padding*1.7;
+            border-radius: $border-radius;
+            transition: opacity 150ms ease-in-out;
+            &:hover{
+                cursor: pointer;
+                opacity: .8;
+            }
+        }
+    }
+    .user-wrapper{
+        background-color: var(--bkg-color);
+        padding: $padding*3;
+        border-radius: $border-radius;
+        display: grid;
+        gap: $gap;
+        grid-template-columns: .6fr 1fr 1fr;
+        grid-template-areas:
+        "a b b"
+        "a c c";
+
+        .profile-picture{
+            grid-area: a;
+            max-width: 100%;
+            border-radius: 100vh;
+        }
+
+        .main-info{
+            grid-area: b;
+            display: flex;
+            justify-content: space-between;
+            .identifier{
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        .about-user{
+            grid-area: c;
+            display: flex;
+            flex-direction: column;
+            gap: $gap;
+            .status{
+            }
+    
+            .additional-info{
+            }
+        }
+    }
 }
