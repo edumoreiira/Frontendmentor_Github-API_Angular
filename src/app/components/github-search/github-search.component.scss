@@ -27,7 +27,7 @@ $border-radius: .65em;
     font-size: 1.1em;
     max-width: min(43em, 90%);
     max-height: 100%;
-    overflow: auto;
+    // overflow: auto;
     display: flex;
     flex-direction: column;
     gap: $gap;
@@ -101,6 +101,7 @@ $border-radius: .65em;
         border-radius: $border-radius;
         display: grid;
         gap: $gap;
+        column-gap: $gap*1.5;
         grid-template-columns: .6fr 1fr 1fr;
         grid-template-areas:
         "a b b"
@@ -119,6 +120,14 @@ $border-radius: .65em;
             .identifier{
                 display: flex;
                 flex-direction: column;
+                .name{
+                    font-weight: 600;
+                    font-size: 1.7em;
+                }
+                .username{
+                    color: var(--blue-color);
+                    line-height: 1;
+                }
             }
         }
 
@@ -128,9 +137,39 @@ $border-radius: .65em;
             flex-direction: column;
             gap: $gap;
             .status{
+                background-color: var(--canvas-color);
+                padding: $padding $padding*1.5;
+                border-radius: $border-radius;
+                overflow: auto;
+                display: flex;
+                gap: 6vw;
+                .status-wrapper{
+                    display: flex;
+                    flex-direction: column;
+                    .status-name{
+                        font-size: .84em;
+                        font-weight: 100;
+                    }
+                    .status-info{
+                        font-weight: 600;
+                        font-size: 1.2em;
+                    }
+                }
+
             }
     
             .additional-info{
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+                gap: $gap;
+                .info{
+                    display: flex;
+                    gap: $gap;
+                    .info-description{
+                        font-size: .86em;
+                        font-weight: 100;
+                    }
+                }
             }
         }
     }
