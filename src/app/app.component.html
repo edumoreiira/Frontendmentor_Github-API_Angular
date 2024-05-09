@@ -1,1 +1,3 @@
-<app-github-search />
+<app-github-search [darkMode]="theme" (darkModeChange)="toggleDarkMode($event)" [ngClass]="theme ? 'dark-theme' : 'light-theme'">
+</app-github-search>
+<!-- <app-github-search [ngClass]="a ? 'dark-theme' : 'light-theme'"/> -->

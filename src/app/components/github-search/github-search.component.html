@@ -1,8 +1,12 @@
 <section class="github-search">
     <header>
         <span class="logo">devfinder</span>
-        <button class="theme-switch">
-            <span>light</span>
+        <button (click)="toggleDarkMode()" class="theme-switch">
+            @if(darkMode){
+                <span>light</span>
+            }@else {
+                <span>dark</span>
+            }
             <i class="fi fi-sr-brightness"></i>
         </button>
     </header>
@@ -15,53 +19,62 @@
         <button (click)="getUser(searchResponse)" class="search-btn">Search</button>
     </div>
 
-    <div class="user-wrapper">
-        <img class="profile-picture" src="https://avatars.githubusercontent.com/u/96441062?v=4" alt="">
+    <div *ngIf="(user$ | async) as user" class="user-wrapper">
+        <img class="profile-picture" src="{{user.avatar_url}}" alt="">
         <div class="main-info">
             <div class="identifier">
-                <span class="name">{{(user | async)?.name}}</span>
-                <a href="google.com" class="username">&#64;{{(user | async)?.login}}</a>
+                <span class="name">{{user.name || user.login}}</span>
+                <a href="{{user.html_url}}" class="username">&#64;{{user.login}}</a>
             </div>
-            <span class="join-date">{{(user | async)?.created_at}}</span>
+            <span class="join-date">Joined {{user.created_at | date:'dd MMM yyyy'}}</span>
         </div>
         <div class="about-user">
-            <div class="bio-wrapper">
-                <p class="bio" data-status="NA">{{(user | async)?.bio}}</p>
+            <div class="bio-wrapper" [ngClass]="{'not-available': !user.bio}">
+                <p class="bio">{{user.bio || "This profile has no bio"}}</p>
             </div>
             <div class="status">
                 <div class="status-wrapper">
                     <span class="status-name">Repos</span>
-                    <span class="status-info">{{(user | async)?.public_repos}}</span>
+                    <span class="status-info">{{user.public_repos}}</span>
                 </div>
                 <div class="status-wrapper">
                     <span class="status-name">Followers</span>
-                    <span class="status-info">{{(user | async)?.followers}}</span>
+                    <span class="status-info">{{user.followers}}</span>
                 </div>
                 <div class="status-wrapper">
                     <span class="status-name">Following</span>
-                    <span class="status-info">{{(user | async)?.following}}</span>
+                    <span class="status-info">{{user.following}}</span>
                 </div>
             </div>
     
             <div class="additional-info">
-                <div class="info">
+                <div class="info" [ngClass]="{'not-available': !user.location}">
                     <i class="fi fi-sr-marker"></i>
-                    <span class="info-description">{{(user | async)?.location}}</span>
+                    <span class="info-description">{{user.location || "Not Available"}}</span>
                 </div>
-                <div class="info">
+                <div class="info" [ngClass]="{'not-available': !user.twitter_username}">
                     <i class="fi fi-brands-twitter"></i>
-                    <span class="info-description">{{(user | async)?.twitter_username}}</span>
+                    @if(user.twitter_username){
+                    <a href="https://twitter.com/{{user.twitter_username}}" class="info-description">{{user.twitter_username}}</a>
+                    }@else {
+                        <span class="info-description">Not Available</span>
+                    }
                 </div>
-                <div class="info">
+                <div class="info" [ngClass]="{'not-available': !user.blog}">
                     <i class="fi fi-br-link-alt"></i>
-                    <a href="https://github.blog" class="info-description">{{(user | async)?.blog}}</a>
+                    @if(user.blog){
+                        <a href="{{user.blog}}" class="info-description">{{user.blog}}</a>
+                    }@else {
+                        <span class="info-description">Not Available</span>
+                    }
                 </div>
-                <div class="info">
+                <div class="info" [ngClass]="{'not-available': !user.company}">
                     <i class="fi fi-ss-building"></i>
-                    <span class="info-description">&#64;{{(user | async)?.company}}</span>
+                    <span class="info-description">{{user.company || "Not Available"}}</span>
                 </div>
             </div>
 
         </div>
     </div>
+
 </section>

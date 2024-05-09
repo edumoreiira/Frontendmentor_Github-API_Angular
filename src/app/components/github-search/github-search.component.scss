@@ -8,6 +8,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
+    background-color: var(--canvas-color);
 }
 
 button{
@@ -17,6 +18,14 @@ button{
 
 i{
     display: flex;
+}
+
+a{
+    color: inherit;
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
+    }
 }
 
 $gap: 1em;
@@ -35,6 +44,7 @@ $border-radius: .65em;
         display: flex;
         justify-content: space-between;
         margin-bottom: $gap;
+        font-size: clamp(0.7em, 6vw, 1em);
         .logo{
             font-size: 1.7em;
             font-weight: 600;
@@ -45,6 +55,10 @@ $border-radius: .65em;
             display: flex;
             align-items: center;
             gap: .8em;
+            &:hover{
+                opacity: 0.7;
+                cursor: pointer;
+            }
             span{
                 font-weight: 600;
                 letter-spacing: .2em;
@@ -57,8 +71,10 @@ $border-radius: .65em;
         display: flex;
         justify-content: space-between;
         background-color: var(--bkg-color);
-        padding: $padding/2;
+        padding: calc($padding / 2);
         border-radius: $border-radius;
+        box-shadow: 0 16px 30px -10px #4660bb33;
+        font-size: clamp(.5em, 3vw, 1em);
         .search{
             display: flex;
             align-items: center;
@@ -86,9 +102,11 @@ $border-radius: .65em;
         .search-btn{
             background-color: var(--blue-color);
             font-weight: 700;
-            padding: $padding $padding*1.7;
+            font-size: 1em;
+            padding: 1em 1.7em;
             border-radius: $border-radius;
             transition: opacity 150ms ease-in-out;
+            color: white;
             &:hover{
                 cursor: pointer;
                 opacity: .8;
@@ -97,6 +115,7 @@ $border-radius: .65em;
     }
     .user-wrapper{
         background-color: var(--bkg-color);
+        box-shadow: 0 16px 30px -10px #4660bb33;
         padding: $padding*3;
         border-radius: $border-radius;
         display: grid;
@@ -116,17 +135,19 @@ $border-radius: .65em;
         .main-info{
             grid-area: b;
             display: flex;
+            gap: $gap;
             justify-content: space-between;
             .identifier{
                 display: flex;
                 flex-direction: column;
                 .name{
                     font-weight: 600;
-                    font-size: 1.7em;
+                    font-size: 1.6em;
+                    line-height: .9;
                 }
                 .username{
                     color: var(--blue-color);
-                    line-height: 1;
+                    line-height: 1.6;
                 }
             }
         }
@@ -136,9 +157,12 @@ $border-radius: .65em;
             display: flex;
             flex-direction: column;
             gap: $gap;
+            .not-available{
+                opacity: 0.5;
+            }
             .status{
                 background-color: var(--canvas-color);
-                padding: $padding $padding*1.5;
+                padding: $padding calc($padding*1.5);
                 border-radius: $border-radius;
                 overflow: auto;
                 display: flex;
@@ -160,6 +184,7 @@ $border-radius: .65em;
     
             .additional-info{
                 display: grid;
+                overflow-wrap: anywhere;
                 grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
                 gap: $gap;
                 .info{
@@ -168,6 +193,37 @@ $border-radius: .65em;
                     .info-description{
                         font-size: .86em;
                         font-weight: 100;
+                    }
+                }
+                .not-available{
+                    opacity: 0.5;
+                }
+            }
+        }
+        @media (max-width: 745px) {
+            grid-template-areas:
+            "a b b"
+            "c c c";
+            grid-template-columns: repeat(3, 1fr);
+            padding: calc($padding * 2);
+            font-size: clamp(0.7em, 3.9vw, 1em);
+            gap: calc($gap*2);
+
+            .main-info{
+                flex-direction: column;
+                justify-content: center;
+                gap: 0;
+            }
+
+            .about-user{
+                .status{
+                    gap: 11vw;
+                    @media (max-width: 500px) {
+                        gap: .4em;
+                        justify-content: space-between;
+                        .status-wrapper{
+                            align-items: center;
+                        }
                     }
                 }
             }
