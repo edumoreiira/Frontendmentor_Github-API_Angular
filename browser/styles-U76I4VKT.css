@@ -1,0 +1,1 @@
+.dark-theme{--canvas-color: #141D2F;--bkg-color: #1E2A47;--text-color: white;--blue-color: #0079FF}.light-theme{--canvas-color: hsl(227, 100%, 98%);--bkg-color: #FEFEFE;--text-color: #4b6a9b;--blue-color: #0079FF}*{margin:0;padding:0;box-sizing:border-box;font-family:Space Mono;transition:background-color .4s ease-in-out,color .4s ease-in-out}img{display:block}body{height:100vh}
