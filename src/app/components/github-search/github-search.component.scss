@@ -32,11 +32,12 @@ $gap: 1em;
 $padding: 1em;
 $border-radius: .65em;
 .github-search{
+    padding-block: 4em;
     flex: 1;
     font-size: 1.1em;
     max-width: min(43em, 90%);
     max-height: 100%;
-    // overflow: auto;
+    overflow: auto;
     display: flex;
     flex-direction: column;
     gap: $gap;
@@ -80,7 +81,7 @@ $border-radius: .65em;
             align-items: center;
             gap: $gap;
             width: 100%;
-            margin-left: $padding;
+            margin-inline: $padding;
             i{
                 color: var(--blue-color);
                 font-size: 1.5em;
@@ -96,6 +97,15 @@ $border-radius: .65em;
                 }
                 &::placeholder{
                     color: var(--text-color);
+                }
+            }
+            .error-message{
+                animation: slide-up 150ms ease-in-out;
+                opacity: 0.7;
+                min-width: fit-content;
+                transition: color 200ms ease-in-out;
+                @media (max-width: 745px) {
+                    display: none;
                 }
             }
         }
@@ -125,6 +135,7 @@ $border-radius: .65em;
         grid-template-areas:
         "a b b"
         "a c c";
+        position: relative;
 
         .profile-picture{
             grid-area: a;
@@ -200,6 +211,9 @@ $border-radius: .65em;
                 }
             }
         }
+        .error-message{
+            display: none;
+        }
         @media (max-width: 745px) {
             grid-template-areas:
             "a b b"
@@ -214,7 +228,17 @@ $border-radius: .65em;
                 justify-content: center;
                 gap: 0;
             }
-
+            .error-message{
+                display: block;
+                position: absolute;
+                top: 2vw;
+                right: 3em;
+                animation: slide-up 150ms ease-in-out;
+                opacity: 0.7;
+                min-width: fit-content;
+                transition: color 200ms ease-in-out;
+                font-size: .85em;
+            }
             .about-user{
                 .status{
                     gap: 11vw;
@@ -228,5 +252,18 @@ $border-radius: .65em;
                 }
             }
         }
+    }
+}
+
+@keyframes slide-up {
+    0% {
+        color: rgb(255, 55, 55);
+        opacity: 0;
+        transform: translateY(20px) scale(0.5);
+    }
+    100% {
+        color: inherit;
+        opacity: 0.8;
+        transform: translateY(0) scale(1);
     }
 }

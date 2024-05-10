@@ -4,10 +4,11 @@
         <button (click)="toggleDarkMode()" class="theme-switch">
             @if(darkMode){
                 <span>light</span>
+                <i class="fi fi-sr-brightness"></i>
             }@else {
                 <span>dark</span>
+                <i class="fi fi-ss-moon-stars"></i>
             }
-            <i class="fi fi-sr-brightness"></i>
         </button>
     </header>
 
@@ -15,11 +16,13 @@
         <div class="search">
             <label for="search-user"><i class="fi fi-rs-search search-icon"></i></label>
             <input (keyup.enter)="getUser(searchResponse)" [(ngModel)]="searchResponse" type="text" placeholder="Search GitHub username..." name="search-user" id="search-user">
+            <div *ngIf="error" class="error-message">{{ error }}</div>
         </div>
         <button (click)="getUser(searchResponse)" class="search-btn">Search</button>
     </div>
 
     <div *ngIf="(user$ | async) as user" class="user-wrapper">
+        <div *ngIf="error" class="error-message">{{ error }}</div>
         <img class="profile-picture" src="{{user.avatar_url}}" alt="">
         <div class="main-info">
             <div class="identifier">

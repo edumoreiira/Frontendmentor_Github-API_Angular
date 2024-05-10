@@ -32,40 +32,18 @@ export class GithubSearchComponent implements OnInit{
   }
 
   user$ = new Observable<GitHubSearch>();
-  lastUser: GitHubSearch = {
-    login: '',
-    id: 0,
-    node_id: '',
-    avatar_url: '',
-    gravatar_id: '',
-    url: '',
-    html_url: '',
-    followers_url: '',
-    following_url: '',
-    gists_url: '',
-    starred_url: '',
-    subscriptions_url: '',
-    organizations_url: '',
-    repos_url: '',
-    events_url: '',
-    received_events_url: '',
-    type: '',
-    site_admin: false,
-    name: '',
-    company: '',
-    blog: '',
-    location: '',
-    email: '',
-    hireable: '',
-    bio: '',
-    twitter_username: '',
-    public_repos: 0,
-    public_gists: 0,
-    followers: 0,
-    following: 0,
-    created_at: '',
-    updated_at: ''
-  };
+  lastUser!: GitHubSearch;
+  error!: string | null;
+  // this.githubService.getData(username).subscribe(
+  //   (user: GitHubUser) => {
+  //     this.user = user;
+  //     this.loading = false; // Define loading como false quando a resposta é recebida com sucesso
+  //   },
+  //   (error) => {
+  //     this.error = "User not found"; // Define a mensagem de erro
+  //     this.loading = false; // Define loading como false em caso de erro
+  //   }
+  // );
 
   getUser(username: string){
     this.user$ = this.githubService.getData(username).pipe(
@@ -74,8 +52,13 @@ export class GithubSearchComponent implements OnInit{
       startWith(this.lastUser)
     )
     this.user$.subscribe(user => {
-    this.lastUser = user});
-
+    this.lastUser = user
+    this.error = null;
+    },
+    (error) => {
+      this.error = "User not found!";
+    }
+  );
   }
 
 
